@@ -13,7 +13,7 @@ import { abnRecordsApi, abnNamesApi } from "@/lib/api";
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"records" | "names">("records");
   const [selectedRecord, setSelectedRecord] = useState<AbnRecord | null>(null);
-  const [selectedName, setSelectedName] = useState<AbnName | null>(null);
+  const [, setSelectedName] = useState<AbnName | null>(null);
   const [abnStats, setAbnStats] = useState<AbnStats | null>(null);
   const [nameStats, setNameStats] = useState<NameStats | null>(null);
   const [loading, setLoading] = useState(true);

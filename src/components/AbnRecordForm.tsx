@@ -20,11 +20,11 @@ export default function AbnRecordForm({
 }: AbnRecordFormProps) {
   const [formData, setFormData] = useState({
     abn: "",
-    status: "Active",
+    status: "Active" as "Active" | "Cancelled",
     entityTypeCode: "",
     entityTypeText: "",
     acn: "",
-    gstStatus: "Registered",
+    gstStatus: "Registered" as "Registered" | "Cancelled",
     state: "",
     postcode: "",
     legalName: "",
@@ -53,11 +53,11 @@ export default function AbnRecordForm({
     } else {
       setFormData({
         abn: "",
-        status: "Active",
+        status: "Active" as "Active" | "Cancelled",
         entityTypeCode: "",
         entityTypeText: "",
         acn: "",
-        gstStatus: "Registered",
+        gstStatus: "Registered" as "Registered" | "Cancelled",
         state: "",
         postcode: "",
         legalName: "",
@@ -88,8 +88,11 @@ export default function AbnRecordForm({
       }
       onSuccess();
       onClose();
-    } catch (err: any) {
-      setError(err.response?.data?.message || "An error occurred");
+    } catch (err: unknown) {
+      setError(
+        (err as { response?: { data?: { message?: string } } })?.response?.data
+          ?.message || "An error occurred"
+      );
     } finally {
       setLoading(false);
     }

@@ -26,7 +26,7 @@ export default function AbnRecordsTable({
   onViewRecord,
   onEditRecord,
   onDeleteRecord,
-  onDataChange,
+  onDataChange: _onDataChange,
   refreshTrigger,
 }: AbnRecordsTableProps) {
   const [records, setRecords] = useState<AbnRecord[]>([]);
@@ -60,13 +60,13 @@ export default function AbnRecordsTable({
 
   useEffect(() => {
     fetchRecords();
-  }, [filters, refreshTrigger]);
+  }, [filters, refreshTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSearch = (search: string) => {
     setFilters((prev) => ({ ...prev, search, page: 1 }));
   };
 
-  const handleFilterChange = (key: keyof AbnRecordFilters, value: any) => {
+  const handleFilterChange = (key: keyof AbnRecordFilters, value: string | number | undefined) => {
     setFilters((prev) => ({ ...prev, [key]: value, page: 1 }));
   };
 

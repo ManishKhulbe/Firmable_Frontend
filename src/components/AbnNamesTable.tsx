@@ -11,7 +11,7 @@ import {
   Trash2,
   Building2,
   User,
-  FileText,
+
   Tag,
 } from "lucide-react";
 import { AbnName, AbnNameFilters } from "@/types";
@@ -37,7 +37,7 @@ export default function AbnNamesTable({
   onViewName,
   onEditName,
   onDeleteName,
-  onDataChange,
+  onDataChange: _onDataChange,
   refreshTrigger,
 }: AbnNamesTableProps) {
   const [names, setNames] = useState<AbnName[]>([]);
@@ -71,13 +71,13 @@ export default function AbnNamesTable({
 
   useEffect(() => {
     fetchNames();
-  }, [filters, refreshTrigger]);
+  }, [filters, refreshTrigger]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSearch = (search: string) => {
     setFilters((prev) => ({ ...prev, search, page: 1 }));
   };
 
-  const handleFilterChange = (key: keyof AbnNameFilters, value: any) => {
+  const handleFilterChange = (key: keyof AbnNameFilters, value: string | number | undefined) => {
     setFilters((prev) => ({ ...prev, [key]: value, page: 1 }));
   };
 
@@ -106,7 +106,7 @@ export default function AbnNamesTable({
   const handleTypeFilter = (type: string) => {
     setFilters((prev) => ({
       ...prev,
-      type: type === prev.type ? undefined : (type as any),
+      type: type === prev.type ? undefined : (type as "TradingName" | "BusinessName" | "LegalName" | "Other"),
       page: 1,
     }));
   };

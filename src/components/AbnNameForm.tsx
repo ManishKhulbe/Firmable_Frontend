@@ -21,7 +21,11 @@ export default function AbnNameForm({
   const [formData, setFormData] = useState({
     abn: "",
     name: "",
-    type: "BusinessName",
+    type: "BusinessName" as
+      | "TradingName"
+      | "BusinessName"
+      | "LegalName"
+      | "Other",
   });
 
   const [loading, setLoading] = useState(false);
@@ -40,7 +44,11 @@ export default function AbnNameForm({
       setFormData({
         abn: "",
         name: "",
-        type: "BusinessName",
+        type: "BusinessName" as
+          | "TradingName"
+          | "BusinessName"
+          | "LegalName"
+          | "Other",
       });
       setIsEditMode(false);
     }
@@ -67,8 +75,11 @@ export default function AbnNameForm({
       }
       onSuccess();
       onClose();
-    } catch (err: any) {
-      setError(err.response?.data?.message || "An error occurred");
+    } catch (err: unknown) {
+      setError(
+        (err as { response?: { data?: { message?: string } } })?.response?.data
+          ?.message || "An error occurred"
+      );
     } finally {
       setLoading(false);
     }
