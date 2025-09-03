@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "docker:build": "docker build -t firmable-frontend .",
+    "docker:run": "docker run -p 3001:3001 firmable-frontend"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
