@@ -23,6 +23,7 @@ interface AbnNamesTableProps {
   onEditName?: (name: AbnName) => void;
   onDeleteName?: (name: AbnName) => void;
   onDataChange?: () => void;
+  refreshTrigger?: number;
 }
 
 const nameTypeIcons = {
@@ -37,6 +38,7 @@ export default function AbnNamesTable({
   onEditName,
   onDeleteName,
   onDataChange,
+  refreshTrigger,
 }: AbnNamesTableProps) {
   const [names, setNames] = useState<AbnName[]>([]);
   const [loading, setLoading] = useState(true);
@@ -69,7 +71,7 @@ export default function AbnNamesTable({
 
   useEffect(() => {
     fetchNames();
-  }, [filters]);
+  }, [filters, refreshTrigger]);
 
   const handleSearch = (search: string) => {
     setFilters((prev) => ({ ...prev, search, page: 1 }));

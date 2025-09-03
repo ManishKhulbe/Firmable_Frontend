@@ -19,6 +19,7 @@ interface AbnRecordsTableProps {
   onEditRecord?: (record: AbnRecord) => void;
   onDeleteRecord?: (record: AbnRecord) => void;
   onDataChange?: () => void;
+  refreshTrigger?: number;
 }
 
 export default function AbnRecordsTable({
@@ -26,6 +27,7 @@ export default function AbnRecordsTable({
   onEditRecord,
   onDeleteRecord,
   onDataChange,
+  refreshTrigger,
 }: AbnRecordsTableProps) {
   const [records, setRecords] = useState<AbnRecord[]>([]);
   const [loading, setLoading] = useState(true);
@@ -58,7 +60,7 @@ export default function AbnRecordsTable({
 
   useEffect(() => {
     fetchRecords();
-  }, [filters]);
+  }, [filters, refreshTrigger]);
 
   const handleSearch = (search: string) => {
     setFilters((prev) => ({ ...prev, search, page: 1 }));
