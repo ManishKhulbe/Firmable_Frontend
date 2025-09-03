@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   // Environment variables configuration
   env: {
     NEXT_PUBLIC_API_URL:
-      process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/v1",
+      process.env.NEXT_PUBLIC_API_URL || "http://51.21.202.114/api/v1",
   },
 
   // Configure for production deployment
